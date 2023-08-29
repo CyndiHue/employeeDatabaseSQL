@@ -12,7 +12,7 @@ create table roles(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 title varchar(30) not null,
 salary decimal,
-department_id int,
+department_ id int,
   FOREIGN KEY (department)
   REFERENCES department(id)
   ON DELETE SET NULL
