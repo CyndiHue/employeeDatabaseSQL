@@ -1,4 +1,5 @@
 import inquirer from 'inquirer'
+import schemas from './db/schemas'
 
 const questions = [
   {
@@ -21,7 +22,24 @@ const questions = [
   {
     type: 'input',
     name: 'addRole',
-    message: 'What is the name of the Role',
+    message: 'What is the name of the Role?',
+    when(answers) {
+      return answers.main === 'add a role';
+    },
+  },
+  {
+    type: 'input',
+    name: 'roleSalary',
+    message: 'What is the salary for the new role?',
+    when(answers) {
+      return answers.main === 'add a role';
+    },
+  },
+  {
+    type: 'list',
+    name: 'roleDept',
+    message: 'Which department does the role belong to?',
+    choices:['1','2','3'],
     when(answers) {
       return answers.main === 'add a role';
     },
@@ -31,7 +49,7 @@ const questions = [
   name: 'addEmployeeFirstName',
   message: 'What is the employees first name',
   when(answers) {
-    return answers.main === 'add an employee' || 'update an employee role';
+    return answers.main === 'add an employee';
   },
   },
   {
@@ -39,15 +57,47 @@ const questions = [
     name: 'addEmployeeLastName',
     message: 'What is the employees last name',
     when(answers) {
-      return answers.main === 'add an employee'||'update an employee role';
+      return answers.main === 'add an employee';
     },
   },
   {
     type: 'input',
-    name: 'addEmployeeRole',
+    name: 'employeeRole',
+    message: 'What is the employees last name',
+    when(answers) {
+      return answers.main === 'add an employee';
+    },
+  },
+  {
+    type: 'input',
+    name: 'employeeManager',
+    message: 'Who is the employees manager',
+    when(answers) {
+      return answers.main === 'add an employee';
+    },
+  },
+  {
+    type: 'input',
+    name: 'addNewRole',
     message: 'What is the employees new role',
     when(answers) {
+      return answers.main === 'update an employee role' ;
+    },
+  },
+  {
+    type: 'input',
+    name: 'addEmployeeRoleFirst',
+    message: 'What is the employees last name',
+    when(answers) {
       return answers.main === 'update an employee role';
+    },
+  },
+  {
+    type: 'input',
+    name: 'addEmployeeRoleLast',
+    message: 'What is the employees first name',
+    when(answers) {
+      return answers.main === 'update an employee role' ;
     },
   },
 ];
