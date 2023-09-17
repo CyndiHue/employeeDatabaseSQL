@@ -13,14 +13,14 @@ const questions = [
       return !view('main')(answers);
     },
   },
-  // {
-  //   type: 'input',
-  //   name: 'addDepartment',
-  //   message: 'What is the name of the Department',
-  //   when(answers) {
-  //     return answers.main === 'add a department';
-  //   },
-  // },
+  {
+    type: 'input',
+    name: 'addDepartment',
+    message: 'What is the name of the Department',
+    when(answers) {
+      return answers.main === 'add a department';
+    },
+  },
   // {
   //   type: 'input',
   //   name: 'addRole',
@@ -114,7 +114,11 @@ inquirer.prompt(questions).then((answers) => {
   console.log(JSON.stringify(answers, null, '  '));
   if (answers.main === 'view all departments') {
     viewDepartments()
-  } else if() {}
+  } else if(answers.main === 'view all roles') {
+    viewRoles()
+  }else if(answers.main === 'view all employees'){
+    viewEmployees()
+  }
 });
 
 
@@ -122,5 +126,19 @@ function viewDepartments() {
   db.findAllDepts()
   .then(([departments]) => {
     console.table(departments)
+  })
+}
+
+function viewRoles() {
+  db.findAllRoles()
+  .then(([roles]) => {
+    console.table(roles)
+  })
+}
+
+function viewEmployees() {
+  db.findAllEmployees()
+  .then(([employees]) => {
+    console.table(employees)
   })
 }
